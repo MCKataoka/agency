@@ -32,8 +32,8 @@ def get_movies(jwt):
 # Route for getting a specific movie
 
 
-@app.route('/movies')
-@requires_auth('get:movies')
+@app.route('/movies/<int:id>')
+# @requires_auth('get:movies')
 def get_movie_by_id(jwt, id):
     """Get a specific movie route"""
     print('HEY MADE IT HERE 2', id)
@@ -50,7 +50,7 @@ def get_movie_by_id(jwt, id):
 
 
 @app.route('/movies', methods=['POST'])
-@requires_auth('post:movies')
+# @requires_auth('post:movies')
 def post_movie(jwt):
     """Create a movie route"""
     # Process request data
@@ -75,7 +75,7 @@ def post_movie(jwt):
 
 
 @app.route('/movies/<int:id>', methods=['PATCH'])
-@requires_auth('patch:movies')
+# @requires_auth('patch:movies')
 def patch_movie(jwt, id):
     """Update a movie route"""
 
@@ -105,7 +105,7 @@ def patch_movie(jwt, id):
 
 
 @app.route('/movies/<int:id>', methods=['DELETE'])
-@requires_auth('delete:movies')
+# @requires_auth('delete:movies')
 def delete_movie(jwt, id):
     """Delete a movie route"""
     movie = Movie.query.get(id)
@@ -141,7 +141,7 @@ def get_actors(jwt):
 
 
 @app.route('/actors/<int:id>')
-# @requires_auth('get:actors')
+# #@requires_auth('get:actors')
 def get_actor_by_id(jwt, id):
     """Get all actors route"""
     actor = Actor.query.get(id)
@@ -156,7 +156,7 @@ def get_actor_by_id(jwt, id):
 
 
 @app.route('/actors', methods=['POST'])
-# @requires_auth('post:actors')
+# #@requires_auth('post:actors')
 def post_actor(jwt):
     """Get all movies route"""
     data = request.get_json()
@@ -180,7 +180,7 @@ def post_actor(jwt):
 
 
 @app.route('/actors/<int:id>', methods=['PATCH'])
-# @requires_auth('patch:actors')
+# #@requires_auth('patch:actors')
 def patch_actor(jwt, id):
     """Update an actor Route"""
 
@@ -212,7 +212,7 @@ def patch_actor(jwt, id):
 
 
 @app.route('/actors/<int:id>', methods=['DELETE'])
-# @requires_auth('delete:actors')
+# #@requires_auth('delete:actors')
 def delete_actor(jwt, id):
     """Delete an actor Route"""
     actor = Actor.query.get(id)
