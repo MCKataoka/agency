@@ -16,13 +16,10 @@ CORS(app)
 
 # Route for getting all movies
 
-print('HEY MADE IT HERE')
-
 
 @app.route('/movies')
-# @requires_auth('get:movies')
-def get_movies():
-    print('HEY MADE IT HERE 2')
+@requires_auth('get:movies')
+def get_movies(jwt):
     """Get all movies route"""
 
     movies = Movie.query.all()
@@ -35,10 +32,11 @@ def get_movies():
 # Route for getting a specific movie
 
 
-@app.route('/movies/<int:id>')
-# @requires_auth('get:movies')
+@app.route('/movies')
+@requires_auth('get:movies')
 def get_movie_by_id(jwt, id):
     """Get a specific movie route"""
+    print('HEY MADE IT HERE 2', id)
     movie = Movie.query.get(id)
 
     # return 404 if there is no movie with id
@@ -52,7 +50,7 @@ def get_movie_by_id(jwt, id):
 
 
 @app.route('/movies', methods=['POST'])
-# @requires_auth('post:movies')
+@requires_auth('post:movies')
 def post_movie(jwt):
     """Create a movie route"""
     # Process request data
@@ -77,7 +75,7 @@ def post_movie(jwt):
 
 
 @app.route('/movies/<int:id>', methods=['PATCH'])
-# @requires_auth('patch:movies')
+@requires_auth('patch:movies')
 def patch_movie(jwt, id):
     """Update a movie route"""
 
@@ -107,7 +105,7 @@ def patch_movie(jwt, id):
 
 
 @app.route('/movies/<int:id>', methods=['DELETE'])
-# @requires_auth('delete:movies')
+@requires_auth('delete:movies')
 def delete_movie(jwt, id):
     """Delete a movie route"""
     movie = Movie.query.get(id)
