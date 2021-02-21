@@ -30,7 +30,7 @@ def get_token_auth_header():
     """
 
     auth = request.headers.get('Authorization', None)
-    print(f'Agency get_toke_auth_header {auth}')
+    #print(f'Agency get_toke_auth_header {auth}')
     if not auth:
         print('Agency get_toke_auth_header not allowed')
         raise AuthError({
@@ -128,19 +128,13 @@ def verify_decode_jwt(token):
 
 
 def requires_auth(permission=''):
-    print('HELLO')
-
     def requires_auth_decorator(f):
-        print('HELLO 2')
-
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
-            print('HELLO 3', token)
             try:
                 payload = verify_decode_jwt(token)
             except:
-                print('HELLO 401')
                 abort(401)
 
             check_permissions(permission, payload)

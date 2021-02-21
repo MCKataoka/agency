@@ -75,7 +75,7 @@ class Movie(db.Model):
 
     id = Column(Integer, primary_key=True)
     title = Column(String(120), unique=True, nullable=False)
-    release_date = Column(DateTime(), nullable=False)
+    release_date = Column(String(120), nullable=False)
 
     def insert(self):
         db.session.add(self)
