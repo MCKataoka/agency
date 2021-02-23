@@ -13,9 +13,8 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def seed():
-    Movie(title='Terminator Dark Fate', release_date='2019-05-06').insert()
-    Movie(title='Terminator Rise of the machines',
-          release_date='2003-05-06').insert()
+    Movie(title='Movie 1', release_date='2022-05-06').insert()
+    Movie(title='Movie 2', release_date='2022-05-07').insert()
 
     Actor(name='Jason', age=22, gender='male').insert()
     Actor(name='Janice', age=11, gender='female').insert()

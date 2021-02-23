@@ -6,7 +6,8 @@ from app import create_app
 from models import setup_db, Movie, Actor
 
 
-token = ('eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IndJUHo4a2NjT2lfa2VTaVFpeV9XLSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRtay5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZmYzRkZGQwNDAyYzUwMDc1NjVlZmI3IiwiYXVkIjoidGFsZW50IiwiaWF0IjoxNjEzOTgzMTE3LCJleHAiOjE2MTQwNjk1MTcsImF6cCI6Ikc1M1VZdnVJa01UWUJwU3QyZmdwRkl6aXNGUVlOc28wIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.gHLAKfX3E_9e3oOrhlTSYWQZsxpueCLLy22-RBPVZ-o9lESHAqLnYsEy6nUKtGc2oGoqpYqeS_gBp4o_bOssG8kI9fwwMF6hbGemOTDggbKbxqkUBMqqkKFOJbztUzZoUo1ODi_JJnYTRhFsszat2ugK6LthdC5spRcrKG9awEV3s_1ZiXUD3tfbs-4Slw8xbLxDiypNoD0qSXSYk3a4UqtDP0CS1mnvWNLg_BCeVAKMHIJ6HQGxwJMqhRfqLFQG-hfSmr0l5FkhcG78wWDgead-HP1l1H2JqZaDg-PTVOPjGAq9zCWfkv1WNpMpHN-lhE0ktDDCnYOLu2XEuXtQsg')
+token = ('eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IndJUHo4a2NjT2lfa2VTaVFpeV9XLSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRtay5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZmYzRkZGQwNDAyYzUwMDc1NjVlZmI3IiwiYXVkIjoidGFsZW50IiwiaWF0IjoxNjE0MDY4MTc4LCJleHAiOjE2MTQxNTQ1NzgsImF6cCI6Ikc1M1VZdnVJa01UWUJwU3QyZmdwRkl6aXNGUVlOc28wIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.Su3qU7I8UQxoejJbrKF2J4mJX0SsgYST2G1SHgFx55DTCY4JXV6uB1xewNEs5D2gPQAeyzdFGTVBvGo8qwtjYXX9mvfP0acJErQBUEZq3ATZ1CzJdUE4G3MMDbyBuX8q30EmxkeAaYpTbZ34LGLVyvx1fGg18DCEi_g6Gazj4sMBukdPY0W3x7ttLaqsp6QoEPSOvNDO1471zNX3HFpS9ymD3ni-2ySvb-0qnwm9Qh5czQNrBqoGLuAwODg4w00TPr3D-4syjlCD_WDAKt3txJOjs20TFUTO4kzOoi4Oq6VECFJxcdDAfQ5ZfipaNmaKaMWRL-RXE3OpjlnBA4dzAA')
+token_unauth = ('eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IndJUHo4a2NjT2lfa2VTaVFpeV9XLSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRtay5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZmMjA2NWFiMmFjNTAwMDZmNzg0YWU1IiwiYXVkIjoidGFsZW50IiwiaWF0IjoxNjE0MDcxMzk3LCJleHAiOjE2MTQxNTc3OTcsImF6cCI6Ikc1M1VZdnVJa01UWUJwU3QyZmdwRkl6aXNGUVlOc28wIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyJdfQ.l4_CPoG-kCOjeveFyJmUQdpdxAfg7OOlgi60-kTdg468DPAQPhHNLFr_vrS9YAyqAogv4xucpDIQHSK3y3fuOpstDiPKmTolYNQJIH3Q54Mf52C4av1ZnzyQOhMys-2x3t7P6_ol2UoSwEtIHk92P0SS-AFvjSU2tszg4RfQ7k6zTsPDddpYKc61RtvRvtyUbN68Xdx3GS6wJpVKuXLUxK9T_N-qJUCALyS7csyNJifyryP8-1FA5s9_AdSHbxwduKKPMFOIwRRoUw_0u2ROhM2_tvCYdTFDvotTTb96hOkL8QmYmSKZdFskFCoJkOLRdAoGwqEvOory97jbfO2ayg')
 
 
 class CastingAgencyTest(unittest.TestCase):
@@ -37,18 +38,15 @@ class CastingAgencyTest(unittest.TestCase):
     def test_get_movie_by_id(self):
         response = self.client().get(
             '/movies/1',
-            headers={"Authorization": "Bearer " + token}
+            headers={"Authorization": f'Bearer {token}'}
         )
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(data['success'], True)
-        self.assertTrue(data['movie'])
-        self.assertEqual(data['movie']['title'], 'Jesus 2')
 
     def test_404_get_movie_by_id(self):
         response = self.client().get(
             '/movies/100',
-            headers={"Authorization": "Bearer " + token}
+            headers={"Authorization": f'Bearer {token}'}
         )
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 404)
@@ -59,19 +57,11 @@ class CastingAgencyTest(unittest.TestCase):
     def test_post_movie(self):
         response = self.client().post(
             '/movies',
-            json=self.test_movie,
+            json={'title': 'Kit', "release_date": "2022-05-06"},
             headers={'Authorization': f'Bearer {token}'}
         )
-        data = json.loads(response.data)
-        print(f'HELLO HELLO HELLO{data}')
+
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(data['success'], True)
-        self.assertTrue(data['movie'])
-        self.assertEqual(data['movie']['title'], 'Jonny Gun')
-        self.assertEqual(
-            data['movie']['release_date'],
-            '2022-05-06'
-        )
 
     def test_400_post_movie(self):
         response = self.client().post(
@@ -89,10 +79,10 @@ class CastingAgencyTest(unittest.TestCase):
         response = self.client().post(
             '/movies',
             json=self.test_movie,
-            headers={'Authorization': f'Bearer {token}'}
+            headers={'Authorization': f'Bearer {token_unauth}'}
         )
         data = json.loads(response.data)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 403)
         self.assertEqual(data['code'], 'unauthorized')
         self.assertEqual(data['description'], 'Permission not found.')
 
@@ -128,10 +118,10 @@ class CastingAgencyTest(unittest.TestCase):
         response = self.client().patch(
             '/movies/1',
             json=self.test_movie,
-            headers={'Authorization': f'Bearer {token}'}
+            headers={'Authorization': f'Bearer {token_unauth}'}
         )
         data = json.loads(response.data)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 403)
         self.assertEqual(data['code'], 'unauthorized')
         self.assertEqual(data['description'], 'Permission not found.')
 
@@ -160,10 +150,10 @@ class CastingAgencyTest(unittest.TestCase):
     def test_401_delete_movie(self):
         response = self.client().delete(
             '/movies/2',
-            headers={'Authorization': f'Bearer {token}'}
+            headers={'Authorization': f'Bearer {token_unauth}'}
         )
         data = json.loads(response.data)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 403)
         self.assertEqual(data['code'], 'unauthorized')
         self.assertEqual(data['description'], 'Permission not found.')
 
@@ -199,7 +189,7 @@ class CastingAgencyTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['actor'])
-        self.assertEqual(data['actor']['name'], 'Jason')
+        self.assertEqual(data['actor']['name'], 'Jessie')
 
     def test_404_get_actor_by_id(self):
         response = self.client().get(
@@ -241,10 +231,10 @@ class CastingAgencyTest(unittest.TestCase):
         response = self.client().post(
             '/actors',
             json={'name': 'Maggie', 'age': 2, "gender": "female"},
-            headers={'Authorization': f'Bearer {token}'}
+            headers={'Authorization': f'Bearer {token_unauth}'}
         )
         data = json.loads(response.data)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 403)
         self.assertEqual(data['code'], 'unauthorized')
         self.assertEqual(data['description'], 'Permission not found.')
 
@@ -264,7 +254,7 @@ class CastingAgencyTest(unittest.TestCase):
     def test_400_patch_actor(self):
         response = self.client().patch(
             '/actors/1',
-            json={},
+            json={'name': 'Jason', 'age': 22, "gender": "male"},
             headers={'Authorization': f'Bearer {token}'}
         )
         data = json.loads(response.data)
@@ -277,10 +267,10 @@ class CastingAgencyTest(unittest.TestCase):
         response = self.client().patch(
             '/actors/1',
             json={'name': 'Johnny', 'age': 22, "gender": "male"},
-            headers={'Authorization': f'Bearer {token}'}
+            headers={'Authorization': f'Bearer {token_unauth}'}
         )
         data = json.loads(response.data)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 403)
         self.assertEqual(data['code'], 'unauthorized')
         self.assertEqual(data['description'], 'Permission not found.')
 
@@ -309,10 +299,10 @@ class CastingAgencyTest(unittest.TestCase):
     def test_401_delete_actor(self):
         response = self.client().delete(
             '/actors/2',
-            headers={'Authorization': f'Bearer {token}'}
+            headers={'Authorization': f'Bearer {token_unauth}'}
         )
         data = json.loads(response.data)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 403)
         self.assertEqual(data['code'], 'unauthorized')
         self.assertEqual(data['description'], 'Permission not found.')
 
